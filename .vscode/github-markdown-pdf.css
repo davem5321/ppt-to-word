@@ -1,0 +1,555 @@
+/*
+ * GitHub-flavored Markdown CSS for PDF output via markdown-pdf extension.
+ * Light theme only (PDFs should always be light background).
+ * Selectors use `body` instead of `.markdown-body` so they apply
+ * in the markdown-pdf HTML wrapper.
+ *
+ * Based on https://github.com/sindresorhus/github-markdown-css
+ */
+
+/* ── CSS Custom Properties (light theme) ──────────────────────── */
+body {
+  color-scheme: light;
+
+  --base-size-4: 0.25rem;
+  --base-size-8: 0.5rem;
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-40: 2.5rem;
+
+  --base-text-weight-normal: 400;
+  --base-text-weight-medium: 500;
+  --base-text-weight-semibold: 600;
+
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --fontStack-sansSerif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+  --fgColor-default: #1f2328;
+  --fgColor-muted: #59636e;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-danger: #d1242f;
+  --fgColor-done: #8250df;
+  --fgColor-success: #1a7f37;
+
+  --bgColor-default: #ffffff;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --bgColor-attention-muted: #fff8c5;
+
+  --borderColor-default: #d1d9e0;
+  --borderColor-muted: #d1d9e0b3;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #1a7f37;
+  --borderColor-neutral-muted: #d1d9e0b3;
+
+  --focus-outlineColor: #0969da;
+}
+
+/* ── Base body styles ─────────────────────────────────────────── */
+body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-default);
+  font-family: var(--fontStack-sansSerif);
+  font-size: 16px;
+  font-weight: var(--base-text-weight-normal);
+  line-height: 1.5;
+  word-wrap: break-word;
+  /* GitHub uses max-width 980px with padding for its readme view */
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+body > *:first-child {
+  margin-top: 0 !important;
+}
+
+body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ── Links ────────────────────────────────────────────────────── */
+body a {
+  background-color: transparent;
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+body a:hover {
+  text-decoration: underline;
+}
+
+body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Typography ───────────────────────────────────────────────── */
+body b,
+body strong {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+body dfn {
+  font-style: italic;
+}
+
+body mark {
+  background-color: var(--bgColor-attention-muted);
+  color: var(--fgColor-default);
+}
+
+body small {
+  font-size: 90%;
+}
+
+body sub,
+body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+body sub {
+  bottom: -0.25em;
+}
+
+body sup {
+  top: -0.5em;
+}
+
+/* ── Headings ─────────────────────────────────────────────────── */
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  margin-top: var(--base-size-24);
+  margin-bottom: var(--base-size-16);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: 1.25;
+}
+
+body h1 {
+  margin: 0.67em 0;
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid var(--borderColor-muted);
+}
+
+body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--borderColor-muted);
+}
+
+body h3 {
+  font-size: 1.25em;
+}
+
+body h4 {
+  font-size: 1em;
+}
+
+body h5 {
+  font-size: 0.875em;
+}
+
+body h6 {
+  font-size: 0.85em;
+  color: var(--fgColor-muted);
+}
+
+/* ── Paragraphs & blocks ──────────────────────────────────────── */
+body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+body p,
+body blockquote,
+body ul,
+body ol,
+body dl,
+body table,
+body pre,
+body details {
+  margin-top: 0;
+  margin-bottom: var(--base-size-16);
+}
+
+/* ── Blockquotes ──────────────────────────────────────────────── */
+body blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: var(--fgColor-muted);
+  border-left: 0.25em solid var(--borderColor-default);
+}
+
+body blockquote > :first-child {
+  margin-top: 0;
+}
+
+body blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* ── Lists ────────────────────────────────────────────────────── */
+body ul,
+body ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2em;
+}
+
+body ol ol,
+body ul ol {
+  list-style-type: lower-roman;
+}
+
+body ul ul ol,
+body ul ol ol,
+body ol ul ol,
+body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+body ul ul,
+body ul ol,
+body ol ol,
+body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+body li > p {
+  margin-top: var(--base-size-16);
+}
+
+body li + li {
+  margin-top: 0.25em;
+}
+
+body dd {
+  margin-left: 0;
+}
+
+body dl {
+  padding: 0;
+}
+
+body dl dt {
+  padding: 0;
+  margin-top: var(--base-size-16);
+  font-size: 1em;
+  font-style: italic;
+  font-weight: var(--base-text-weight-semibold);
+}
+
+body dl dd {
+  padding: 0 var(--base-size-16);
+  margin-bottom: var(--base-size-16);
+}
+
+/* ── Horizontal rules ─────────────────────────────────────────── */
+body hr {
+  box-sizing: content-box;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--borderColor-muted);
+  height: 0.25em;
+  padding: 0;
+  margin: var(--base-size-24) 0;
+  background-color: var(--borderColor-default);
+}
+
+/* ── Images ───────────────────────────────────────────────────── */
+body img {
+  border-style: none;
+  max-width: 100%;
+  box-sizing: content-box;
+}
+
+/* ── Code (inline) ────────────────────────────────────────────── */
+body code,
+body tt {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  white-space: break-spaces;
+  background-color: var(--bgColor-neutral-muted);
+  border-radius: 6px;
+  font-family: var(--fontStack-monospace);
+}
+
+body code br,
+body tt br {
+  display: none;
+}
+
+body del code {
+  text-decoration: inherit;
+}
+
+body samp {
+  font-size: 85%;
+}
+
+/* ── Code blocks ──────────────────────────────────────────────── */
+body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: var(--fontStack-monospace);
+  font-size: 12px;
+  word-wrap: normal;
+}
+
+body pre code {
+  font-size: 100%;
+}
+
+body pre > code {
+  padding: 0;
+  margin: 0;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+body .highlight {
+  margin-bottom: var(--base-size-16);
+}
+
+body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+body .highlight pre,
+body pre {
+  padding: var(--base-size-16);
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-muted);
+  border-radius: 6px;
+}
+
+body pre code,
+body pre tt {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+/* ── Tables ───────────────────────────────────────────────────── */
+body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  font-variant: tabular-nums;
+}
+
+body table th {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+body table th,
+body table td {
+  padding: 6px 13px;
+  border: 1px solid var(--borderColor-default);
+}
+
+body table td > :last-child {
+  margin-bottom: 0;
+}
+
+body table tr {
+  background-color: var(--bgColor-default);
+  border-top: 1px solid var(--borderColor-muted);
+}
+
+body table tr:nth-child(2n) {
+  background-color: var(--bgColor-muted);
+}
+
+body table img {
+  background-color: transparent;
+}
+
+/* ── Task lists ───────────────────────────────────────────────── */
+body .task-list-item {
+  list-style-type: none;
+}
+
+body .task-list-item label {
+  font-weight: var(--base-text-weight-normal);
+}
+
+body .task-list-item + .task-list-item {
+  margin-top: var(--base-size-4);
+}
+
+body .task-list-item-checkbox {
+  margin: 0 0.2em 0.25em -1.4em;
+  vertical-align: middle;
+}
+
+/* ── Keyboard keys ────────────────────────────────────────────── */
+body kbd {
+  display: inline-block;
+  padding: var(--base-size-4);
+  font: 11px var(--fontStack-monospace);
+  line-height: 10px;
+  color: var(--fgColor-default);
+  vertical-align: middle;
+  background-color: var(--bgColor-muted);
+  border: solid 1px var(--borderColor-neutral-muted);
+  border-bottom-color: var(--borderColor-neutral-muted);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--borderColor-neutral-muted);
+}
+
+/* ── Emoji ────────────────────────────────────────────────────── */
+body .emoji {
+  max-width: none;
+  vertical-align: text-top;
+  background-color: transparent;
+}
+
+/* ── Footnotes ────────────────────────────────────────────────── */
+body [data-footnote-ref]::before {
+  content: "[";
+}
+
+body [data-footnote-ref]::after {
+  content: "]";
+}
+
+body .footnotes {
+  font-size: 12px;
+  color: var(--fgColor-muted);
+  border-top: 1px solid var(--borderColor-default);
+}
+
+body .footnotes ol {
+  padding-left: var(--base-size-16);
+}
+
+/* ── GitHub Alerts (Note, Warning, Tip, etc.) ─────────────────── */
+body .markdown-alert {
+  padding: var(--base-size-8) var(--base-size-16);
+  margin-bottom: var(--base-size-16);
+  color: inherit;
+  border-left: 0.25em solid var(--borderColor-default);
+}
+
+body .markdown-alert > :first-child {
+  margin-top: 0;
+}
+
+body .markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+body .markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: var(--base-text-weight-medium);
+  align-items: center;
+  line-height: 1;
+}
+
+body .markdown-alert.markdown-alert-note {
+  border-left-color: var(--borderColor-accent-emphasis);
+}
+
+body .markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--fgColor-accent);
+}
+
+body .markdown-alert.markdown-alert-important {
+  border-left-color: var(--borderColor-done-emphasis);
+}
+
+body .markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--fgColor-done);
+}
+
+body .markdown-alert.markdown-alert-warning {
+  border-left-color: var(--borderColor-attention-emphasis);
+}
+
+body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--fgColor-attention);
+}
+
+body .markdown-alert.markdown-alert-tip {
+  border-left-color: var(--borderColor-success-emphasis);
+}
+
+body .markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--fgColor-success);
+}
+
+body .markdown-alert.markdown-alert-caution {
+  border-left-color: var(--borderColor-danger-emphasis);
+}
+
+body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--fgColor-danger);
+}
+
+/* ── Heading code ─────────────────────────────────────────────── */
+body h1 tt,
+body h1 code,
+body h2 tt,
+body h2 code,
+body h3 tt,
+body h3 code,
+body h4 tt,
+body h4 code,
+body h5 tt,
+body h5 code,
+body h6 tt,
+body h6 code {
+  padding: 0 0.2em;
+  font-size: inherit;
+}
+
+/* ── Misc ─────────────────────────────────────────────────────── */
+body .absent {
+  color: var(--fgColor-danger);
+}
+
+body summary {
+  display: list-item;
+  cursor: pointer;
+}
+
+body details summary {
+  cursor: pointer;
+}
+
+body [hidden] {
+  display: none !important;
+}

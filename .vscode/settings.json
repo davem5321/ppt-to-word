@@ -1,0 +1,22 @@
+{
+  "markdown-pdf.convertOnSave": true,
+  "markdown-pdf.convertOnSaveExclude": [
+    "\\.github/.*"
+  ],
+  "markdown-pdf.outputDirectory": "pdf",
+  "markdown-pdf.outputDirectoryRelativePathFile": true,
+  "markdown-pdf.includeDefaultStyles": false,
+  "markdown-pdf.styles": [
+    ".vscode/github-markdown-pdf.css"
+  ],
+  "markdown-pdf.highlightStyle": "github.css",
+  "markdown-pdf.printBackground": true,
+  "markdown-pdf.format": "A4",
+  "markdown-pdf.orientation": "landscape",
+  "markdown-pdf.margin": {
+    "top": "1.5cm",
+    "bottom": "1.5cm",
+    "right": "1.5cm",
+    "left": "1.5cm"
+  }
+}
